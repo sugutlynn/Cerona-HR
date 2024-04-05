@@ -591,32 +591,33 @@
       </div>
       <div class="row">
         <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="100">
-          <form action="#" method="post">
-            <div class="form-group row">
-              <div class="col-md-6 mb-4 mb-lg-0">
-                <input type="text" class="form-control" placeholder="First name">
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="First name">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-12">
-                <input type="text" class="form-control" placeholder="Email address">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-12">
-                <textarea name="" id="" class="form-control" placeholder="Write your message." cols="30"
-                  rows="10"></textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-6 ml-auto">
-                <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
-              </div>
-            </div>
-          </form>
+          <form id="contactForm" method="post">
+    <div class="form-group row">
+        <div class="col-md-6 mb-4 mb-lg-0">
+            <input id="firstName" type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col-md-6">
+            <input id="lastName" type="text" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <input id="email" type="email" class="form-control" placeholder="Email address">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <textarea id="message" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <div id="responseMessage" style="display: none;"></div> <!-- Response message display -->
+    <div class="form-group row">
+        <div class="col-md-6 ml-auto">
+            <input id="submitButton" type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
+        </div>
+    </div>
+</form>
+
         </div>
         <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
           <h2 class="text-primary">Need to know more on details. Get In Touch</h2>
@@ -685,7 +686,41 @@
       </div>
     </div>
   </footer>
+<script>document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
 
+    // Get form data
+    var formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+    };
+
+    // Send form data to your endpoint URL
+    fetch('https://cerona-hr-backend.onrender.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            // Display response message
+            response.json().then(data => {
+                document.getElementById('responseMessage').innerText = data.message;
+                document.getElementById('responseMessage').style.display = 'block';
+            });
+            // Hide the form
+            document.getElementById('contactForm').style.display = 'none';
+        } else {
+            console.error('Failed to submit form');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script> 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
