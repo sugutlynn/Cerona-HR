@@ -701,12 +701,12 @@
 
         // Send form data to your endpoint URL
         fetch('https://cerona-hr-backend.onrender.com/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)  // Serialization here
+})
         .then(response => {
             if (response.ok) {
                 // Display response message
