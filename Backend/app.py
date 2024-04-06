@@ -30,7 +30,7 @@ def contact_form():
         message = request.form.get('message')
         
         # Send email
-        msg = Message(subject='New Message from Contact Form',
+        msg = Message(subject='New Message from Cerona Contact Form',
                       sender='arthurbreck417@gmail.com',
                       recipients=['arthurbreck417@gmail.com'])  # Replace with your email address
         msg.body = f"First Name: {first_name}\nLast Name: {last_name}\nEmail: {email}\nMessage: {message}"
