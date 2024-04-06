@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -37,11 +37,6 @@ def contact_form():
         mail.send(msg)
         
         return jsonify({'message': 'Message sent successfully'}), 200
-
-# Default route for serving the HTML form
-@app.route('/', methods=['GET'])
-def show_form():
-    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
