@@ -686,41 +686,43 @@
       </div>
     </div>
   </footer>
-<script>document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
 
-    // Get form data
-    var formData = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-    };
+        // Get form data
+        var formData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        };
 
-    // Send form data to your endpoint URL
-    fetch('https://cerona-hr-backend.onrender.com/contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        if (response.ok) {
-            // Display response message
-            response.json().then(data => {
-                document.getElementById('responseMessage').innerText = data.message;
-                document.getElementById('responseMessage').style.display = 'block';
-            });
-            // Hide the form
-            document.getElementById('contactForm').style.display = 'none';
-        } else {
-            console.error('Failed to submit form');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
-</script> 
+        // Send form data to your endpoint URL
+        fetch('https://cerona-hr-backend.onrender.com/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Display response message
+                response.json().then(data => {
+                    document.getElementById('responseMessage').innerText = data.message;
+                    document.getElementById('responseMessage').style.display = 'block';
+                });
+                // Hide the form
+                document.getElementById('contactForm').style.display = 'none';
+            } else {
+                console.error('Failed to submit form');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
