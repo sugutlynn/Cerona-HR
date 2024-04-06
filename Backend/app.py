@@ -31,7 +31,7 @@ def contact_form():
         
         # Send email
         msg = Message(subject='New Message from Contact Form',
-                      sender=email,
+                      sender='arthurbreck417@gmail.com',
                       recipients=['arthurbreck417@gmail.com'])  # Replace with your email address
         msg.body = f"First Name: {first_name}\nLast Name: {last_name}\nEmail: {email}\nMessage: {message}"
         mail.send(msg)
