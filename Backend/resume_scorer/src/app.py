@@ -4,9 +4,21 @@ from docx import Document
 import io
 from scorer import ResumeScorer
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
+
+origins = [
+        "*",  
+]
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/resume_scorer")
 async def score_resume(resume_file: UploadFile = File(...), job_description: str = ("The job description")) -> JSONResponse:
